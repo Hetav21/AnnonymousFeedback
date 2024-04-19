@@ -11,4 +11,24 @@ generator client {
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+  // url      = "mongodb://localhost:27017/annonmessage"
+}
+
+model Message {
+  msgId        String   @id @default(uuid()) @map("_id") @db.ObjectId
+  content String
+  createdAt DateTime @default(now())
+  user User @relation(fields: [msgId], references: [userId])
+}
+
+model User {
+  userId        String   @id @default(uuid()) @map("_id") @db.ObjectId
+  username  String   @unique
+  email     String   @unique
+  password  String
+  verifyCode String
+  verifyCodeExpiry DateTime
+  isVerified Boolean @default(false)
+  isAcceptingMessage Boolean @default(true)
+  Messages Message[]
 }

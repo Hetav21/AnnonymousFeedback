@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+  nodeimage:
+    image: nodeimage
+    container_name: nodeImageContainer
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    volumes:
+      - type: bind
+        source: ./src
+        target: /app/src
+volumes:
+  mongodb_data:
