@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest){
-    await dbConnect();
+    // await dbConnect();
 
     try {
 
