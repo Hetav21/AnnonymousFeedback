@@ -1,4 +1,3 @@
-import dbConnect from "@/deprecated/dbConnect";
 import { sendVerificationEmail } from "@/helpers/verificationMail";
 import prisma from "@/lib/dbConnect";
 import { ApiResponse } from "@/types/ApiResponse";
@@ -6,8 +5,6 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest){
-    // await dbConnect();
-
     try {
 
         const {username, email, password} = await req.json();
@@ -20,7 +17,7 @@ export async function POST(req: NextRequest){
         });          
 
         if(existingUserVerifiedByUsername != undefined){
-            return NextResponse.json({
+            return NextResponse.json<ApiResponse>({
                 success: false,
                 message: "Username is already taken"
             }

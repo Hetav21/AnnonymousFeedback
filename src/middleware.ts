@@ -24,5 +24,3 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ['/signin', '/signup', '/', '/dashboard/:path*', '/verify/:path*'],
 }
-
-// 58.00
