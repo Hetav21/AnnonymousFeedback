@@ -49,12 +49,6 @@ export async function POST(req: NextRequest) {
       } else {
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        existingUserVerifiedByEmail.password = hashedPassword;
-        existingUserVerifiedByEmail.verifyCode = verifyCode;
-        existingUserVerifiedByEmail.verifyCodeExpiry = new Date(
-          Date.now() + 3600000
-        );
-
         const emailResponse = await sendVerificationEmail(
           email,
           username,
@@ -65,7 +59,11 @@ export async function POST(req: NextRequest) {
           where: {
             email: email,
           },
-          data: existingUserVerifiedByEmail,
+          data: {
+            password: hashedPassword,
+            verifyCode,
+            verifyCodeExpiry: new Date(Date.now() + 3600000),
+          }
         });
       }
     } else {
