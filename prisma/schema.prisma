@@ -15,20 +15,20 @@ datasource db {
 }
 
 model Message {
-  msgId        String   @id @default(uuid()) @map("_id") @db.ObjectId
-  content String
+  msgId     String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
   createdAt DateTime @default(now())
-  user User @relation(fields: [msgId], references: [userId])
+  user      User     @relation(fields: [msgId], references: [userId])
 }
 
 model User {
-  userId        String   @id @default(uuid()) @map("_id") @db.ObjectId
-  username  String   @unique
-  email     String   @unique
-  password  String
-  verifyCode String
-  verifyCodeExpiry DateTime
-  isVerified Boolean @default(false)
-  isAcceptingMessage Boolean @default(true)
-  messages Message[]
+  userId             String    @id @default(auto()) @map("_id") @db.ObjectId
+  username           String    @unique
+  email              String    @unique
+  password           String
+  verifyCode         String
+  verifyCodeExpiry   DateTime
+  isVerified         Boolean   @default(false)
+  isAcceptingMessage Boolean   @default(true)
+  messages           Message[]
 }
