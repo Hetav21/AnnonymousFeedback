@@ -1,26 +1,10 @@
-export { default } from "next-auth/middleware"
-import { NextRequest , NextResponse } from 'next/server'
-import {getToken} from 'next-auth/jwt'
- 
-export async function middleware(request: NextRequest) {
+import { stackMiddlewares } from "./lib/stackMiddlewareHandler";
+import { redirectBasedOnToken } from "./middlewares/redirectBasedOnToken";
 
-    const token = await getToken({req: request});
-    const url = request.nextUrl;
+const middlewares = [redirectBasedOnToken];
 
-    if (token && 
-        (
-            url.pathname.startsWith('/signin') ||
-            url.pathname.startsWith('/signup') ||
-            url.pathname.startsWith('/verify') ||
-            url.pathname.startsWith('/')
-        )
-    ) {
-        return NextResponse.redirect(new URL('/dashboard', request.url))
-    }
+export const middleware = () =>  {return stackMiddlewares(middlewares);}
 
-  return NextResponse.redirect(new URL('/home', request.url))
-}
- 
 export const config = {
-  matcher: ['/signin', '/signup', '/', '/dashboard/:path*', '/verify/:path*'],
-}
+  matcher: ["/signin", "/signup", "/", "/dashboard/:path*", "/verify/:path*"],
+};
