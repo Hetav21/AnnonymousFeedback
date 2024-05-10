@@ -4,26 +4,26 @@ import Credentials from "next-auth/providers/credentials";
 
 declare module "next-auth" {
   interface User {
-    _id?: String;
+    _id?: string;
     isVerified?: Boolean;
     isAcceptingMessages?: Boolean;
-    username?: String;
+    username?: string;
   }
   interface Session {
     user: {
-      _id?: String;
+      _id?: string;
       isVerified?: Boolean;
       isAcceptingMessages?: Boolean;
-      username?: String;
+      username?: string;
     } & DefaultSession["user"];
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    _id?: String;
+    _id?: string;
     isVerified?: Boolean;
     isAcceptingMessages?: Boolean;
-    username?: String;
+    username?: string;
   }
 }

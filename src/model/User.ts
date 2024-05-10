@@ -1,7 +1,7 @@
 import mongoose, {Schema, Document} from "mongoose";
 import {Message, MessageSchema} from "./Message";
 
-export default interface User extends Document {
+export interface User extends Document {
     username: string,
     email: string,
     password: string,

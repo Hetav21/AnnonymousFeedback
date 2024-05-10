@@ -18,6 +18,7 @@ model Message {
   msgId     String   @id @default(auto()) @map("_id") @db.ObjectId
   content   String
   createdAt DateTime @default(now())
+  userId    String
   user      User     @relation(fields: [msgId], references: [userId])
 }
 
