@@ -10,8 +10,6 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   const url = request.nextUrl;
 
-  console.log(token, url)
-
   if (
     token &&
     (url.pathname.startsWith('/signin') ||
