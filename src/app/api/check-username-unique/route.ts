@@ -38,9 +38,11 @@ export async function GET(request: NextRequest) {
     const user = await prisma.user.findUnique({
       where: {
         username,
-        isVerified: true,
-      },
-    });
+        AND: {
+          isVerified: true
+        }
+      }
+    });  
 
     if (user != undefined) {
       return NextResponse.json<ApiResponse>(
