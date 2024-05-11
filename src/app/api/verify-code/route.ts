@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
         } , { status: 403 })
     }
 
-    const user = prisma.user.update({
+    const user = await prisma.user.update({
         where: {
             userId: dbUser.userId
         },
