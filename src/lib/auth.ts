@@ -61,7 +61,6 @@ export const AUTH_OPTIONS: NextAuthOptions = {
           }
         } 
         catch (err: any) {
-          console.error(err);
           throw new Error(err || "An error occurred");
         }
       },

@@ -32,7 +32,7 @@ const SignInPage = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
-    // setIsSubmitting(true)
+    setIsSubmitting(true)
 
     try {
       const result = await signIn('credentials', {
@@ -40,16 +40,6 @@ const SignInPage = () => {
         email: data.identifier,
         password: data.password,
       });
-
-      console.log(result);
-
-      // if(!result?.ok){
-      //   toast({
-      //     title: 'Error',
-      //     description: result?.error,
-      //     variant: 'destructive'
-      //   })
-      // }
 
       if(result?.error) {
         toast({
@@ -77,12 +67,12 @@ const SignInPage = () => {
         variant: 'destructive'
       })
     } finally {
-      // setIsSubmitting(false)
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
@@ -98,7 +88,7 @@ const SignInPage = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
-                  <Input placeholder="email" {...field} name="email" />
+                  <Input placeholder="email@example.com" {...field} name="email" />
                   <FormMessage />
                 </FormItem>
               )}
@@ -110,7 +100,7 @@ const SignInPage = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
-                  <Input placeholder="password" type="password" {...field} name="password" />
+                  <Input placeholder="Some Super Secret Password" type="password" {...field} name="password" />
                   <FormMessage />
                 </FormItem>
               )}
@@ -122,7 +112,7 @@ const SignInPage = () => {
                   Please wait
                 </>
               ) : (
-                'Sign Up'
+                'Sign In'
               )}
             </Button>
           </form>
